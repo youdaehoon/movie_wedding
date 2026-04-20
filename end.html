@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>End Scene</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 18px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+  }
+
+  .last-line {
+    font-size: 22px;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  .show {
+    opacity: 1;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: 30px;
+    font-size: 12px;
+    opacity: 0.3;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="title">MOVIE</div>
+  <div class="subtitle">WEDDING ANNIVERSARY</div>
+
+  <div id="lastLine" class="last-line">
+    이제 우리, 현실로 돌아가 볼까요?
+  </div>
+</div>
+
+<div class="hint">
+  tap anywhere
+</div>
+
+<script>
+  document.body.addEventListener("click", () => {
+    document.getElementById("lastLine").classList.add("show");
+  });
+</script>
+
+</body>
+</html>
