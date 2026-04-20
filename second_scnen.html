@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Second Scene</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+      padding: 20px;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .dialogue {
+      font-size: 18px;
+      opacity: 0.85;
+      line-height: 1.6;
+      max-width: 600px;
+      white-space: pre-line;
+    }
+
+    .qr {
+      margin-top: 20px;
+      padding: 12px;
+      background: #fff;
+      border-radius: 12px;
+    }
+
+    .qr img {
+      width: 160px;
+      height: 160px;
+    }
+
+    .hint {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 8px;
+        color: #111;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- 1. 제목 -->
+    <div class="title">
+        2막. 악수는 포옹으로
+    </div>
+
+    <!-- 2. 주요 대사 -->
+    <div class="dialogue">
+      “... 그리고 ...”
+    </div>
+
+    <!-- QR -->
+    <div class="qr">
+      <img
+         src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://youdaehoon.github.io/movie_wedding/third_scene"
+        alt="QR Code"
+
+      />
+      <div class="hint">스캔하면 다음 장면으로 이동</div>
+    </div>
+
+  </div>
+</body>
+</html>

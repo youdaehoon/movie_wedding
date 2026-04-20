@@ -1,78 +1,143 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>End Scene</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ending Scene</title>
 
-<style>
-  body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    overflow: hidden;
-  }
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
 
-  .container {
-    text-align: center;
-  }
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+    }
 
-  .title {
-    font-size: 18px;
-    opacity: 0.6;
-    margin-bottom: 10px;
-  }
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 1.5s ease;
+    }
 
-  .subtitle {
-    font-size: 24px;
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-  }
+    .title.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .last-line {
-    font-size: 22px;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-  }
+    .final-line {
+      margin-top: 40px;
+         font-size: 18px;
+      opacity: 0.85;
+      line-height: 1.6;
+      max-width: 600px;
+      white-space: pre-line;
+    }
 
-  .show {
-    opacity: 1;
-  }
+    .final-line.done {
+      animation: breathe 4s ease-in-out infinite;
+    }
 
-  .hint {
-    position: absolute;
-    bottom: 30px;
-    font-size: 12px;
-    opacity: 0.3;
-  }
-</style>
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.75));
+      pointer-events: none;
+    }
+
+    .container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.05);
+      animation: flicker 6s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.08; }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="title">MOVIE</div>
-  <div class="subtitle">WEDDING ANNIVERSARY</div>
+  <div class="container">
 
-  <div id="lastLine" class="last-line">
-    이제 우리, 현실로 돌아가 볼까요?
+    <div class="title" id="title">4막. 엔딩 씬</div>
+    <div class="final-line" id="final"></div>
+
   </div>
-</div>
 
-<div class="hint">
-  tap anywhere
-</div>
+  <script>
+    const title = document.getElementById("title");
+    const final = document.getElementById("final");
 
-<script>
-  document.body.addEventListener("click", () => {
-    document.getElementById("lastLine").classList.add("show");
-  });
-</script>
+    const text = `"이제 우리, 현실로 돌아가 볼까요...."`;
+    let i = 0;
+
+    function getDelay(char, index) {
+      // 기본 속도
+      let base = 100 + Math.random() * 100;
+
+      // 문장 리듬
+      if (char === " ") base += 40;
+      if (",".includes(char)) base += 200;
+      if (".".includes(char)) base += 400;
+
+      // 초반은 느리게 시작
+      if (index < 5) base += 80;
+
+      return base;
+    }
+
+    function typeWriter() {
+      if (i < text.length) {
+        final.innerHTML += text.charAt(i);
+
+        const delay = getDelay(text.charAt(i), i);
+        i++;
+
+        setTimeout(typeWriter, delay);
+      } else {
+        // 끝 여운
+        setTimeout(() => {
+          final.classList.add("done");
+        }, 600);
+      }
+    }
+
+    // title 등장
+    setTimeout(() => {
+      title.classList.add("show");
+    }, 800);
+
+    // typing 시작 (약간 더 늦게 → 호흡)
+    setTimeout(() => {
+      typeWriter();
+    }, 2400);
+  </script>
 
 </body>
 </html>
